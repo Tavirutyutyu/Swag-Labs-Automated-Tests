@@ -19,6 +19,23 @@ public class CartPage extends PageBase{
         super(driver, wait, actions);
     }
 
+    public boolean isItemInCart(String itemName) {
+        for (WebElement item : inventoryItems) {
+            WebElement title = item.findElement(By.xpath(".//div[@data-test='inventory-item-name']"));
+            if(title.getText().equals(itemName)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean isItemInCart(List<String> itemNames) {
+        for (String itemName : itemNames) {
+            if(!isItemInCart(itemName)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     private Item buildItem(WebElement item) {
         return new Item(
