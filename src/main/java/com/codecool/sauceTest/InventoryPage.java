@@ -17,6 +17,10 @@ public class InventoryPage extends PageBase {
     private WebElement productSort;
     @FindBy(xpath = "//a[@data-test='shopping-cart-link']")
     private WebElement shoppingCartLink;
+    @FindBy(id ="react-burger-menu-btn")
+    private WebElement burgerMenuBtn;
+    @FindBy(id ="logout_sidebar_link")
+    private WebElement logoutButton;
 
     public InventoryPage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
@@ -70,5 +74,10 @@ public class InventoryPage extends PageBase {
         } catch (NoSuchElementException e) {
             return false;
         }
+    }
+
+    public void logout(){
+        burgerMenuBtn.click();
+        logoutButton.click();
     }
 }
