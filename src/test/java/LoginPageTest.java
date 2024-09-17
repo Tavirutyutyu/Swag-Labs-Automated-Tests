@@ -1,14 +1,12 @@
-import com.codecool.sauceTest.LoginPage;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class LoginPageTest extends TestBase{
-    private LoginPage loginPage;
     @BeforeEach
     public void setUp() {
         driver.get("https://www.saucedemo.com/");
-        loginPage = new LoginPage(driver, wait, actions);
     }
     @Test
     public void testLogin() {

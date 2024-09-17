@@ -10,30 +10,65 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class InventoryPage extends PageBase{
+public class InventoryPage extends PageBase {
     @FindBy(xpath = "//div[@data-test='inventory-item']")
     private List<WebElement> inventoryItems;
     @FindBy(xpath = "//select[@data-test='product-sort-container']")
     private WebElement productSort;
     @FindBy(xpath = "//a[@data-test='shopping-cart-link']")
     private WebElement shoppingCartLink;
+
     public InventoryPage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
     }
 
-    private WebElement getProduct(String productName){
+    public boolean isProductInCart(String productName) {
+        WebElement productElement = getProduct(productName);
+        try {
+            productElement.findElement(By.xpath(".//button[text()='Remove']"));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void addProductToCart(String productName) {
+        WebElement productElement = getProduct(productName);
+        if (productElement != null) {
+            clickOnAddToCartButton(productElement);
+        }
+    }
+
+    public void removeProductFromCart(String productName) {
+        WebElement productElement = getProduct(productName);
+        if (productElement != null) {
+            clickOnRemoveFromCartButton(productElement);
+        }
+    }
+
+    private void clickOnRemoveFromCartButton(WebElement productElement) {
+        WebElement removeButton = productElement.findElement(By.xpath("//button[text()='Remove']"));
+        removeButton.click();
+    }
+
+    private void clickOnAddToCartButton(WebElement productElement) {
+        WebElement addToCartButton = productElement.findElement(By.xpath("//button[text()='Add to cart']"));
+        addToCartButton.click();
+    }
+
+    private WebElement getProduct(String productName) {
         return inventoryItems.stream()
-                .filter(e -> InventoryPage.hasName(e, productName))
+                .filter(e -> hasName(e, productName))
                 .findAny()
                 .orElse(null);
     }
 
-    private static boolean hasName(WebElement element, String productName){
+    private boolean hasName(WebElement element, String productName) {
         try {
-            element.findElement(By.xpath("//div[@data-test='inventory-item-name']"));
+            WebElement title = element.findElement(By.xpath("//div[@data-test='inventory-item-name']"));
+            return title.getText().equals(productName);
         } catch (NoSuchElementException e) {
             return false;
         }
-        return true;
     }
 }

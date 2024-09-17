@@ -1,3 +1,5 @@
+import com.codecool.sauceTest.InventoryPage;
+import com.codecool.sauceTest.LoginPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
@@ -11,11 +13,14 @@ import java.time.Duration;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestBase {
-    private static final Duration TIMEOUT = Duration.ofSeconds(5);
+    private static final Duration TIMEOUT = Duration.ofSeconds(3);
 
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions actions;
+
+    protected LoginPage loginPage;
+    protected InventoryPage inventoryPage;
 
     @BeforeAll
     public void beforeAll() {
@@ -26,6 +31,9 @@ public class TestBase {
         driver.manage().timeouts().implicitlyWait(TIMEOUT);
         wait = new WebDriverWait(driver, TIMEOUT);
         actions = new Actions(driver);
+
+        loginPage = new LoginPage(driver, wait, actions);
+        inventoryPage = new InventoryPage(driver, wait, actions);
     }
     @AfterAll
     public void afterAll() {
@@ -34,4 +42,5 @@ public class TestBase {
             driver = null;
         }
     }
+
 }
