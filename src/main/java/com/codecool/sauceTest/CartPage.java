@@ -52,7 +52,7 @@ public class CartPage extends PageBase{
         return item.findElement(By.xpath(xpath)).getText();
     }
     private void deleteItem(String name) {
-        String xpath = "//button[contains(@id, 'remove-']";
+        String xpath = ".//button[contains(@id, 'remove-']";
         inventoryItems.stream()
             .filter(item -> item.getText().contains(name))
             .findAny().orElseThrow(() -> new RuntimeException("item name not found"))
