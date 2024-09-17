@@ -16,10 +16,19 @@ public class LoginPage extends PageBase{
     @FindBy(xpath = "//*[@data-test='error']")
     private WebElement errorMessage;
 
+    private static final String PASSWORD = "secret_sauce";
     public LoginPage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
     }
-    public void login(String username, String password) {
+
+
+    public void login(String username) {
+        this.username.sendKeys(username);
+        this.password.sendKeys(PASSWORD);
+        this.loginButton.click();
+    }
+
+    public void loginWithPassword(String username, String password) {
         this.username.sendKeys(username);
         this.password.sendKeys(password);
         this.loginButton.click();

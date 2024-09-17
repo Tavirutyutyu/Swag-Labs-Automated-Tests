@@ -1,6 +1,8 @@
 package com.codecool.sauceTest;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,5 +16,9 @@ public class PageBase {
         this.driver = driver;
         this.wait = wait;
         this.actions = actions;
+    }
+    public void goToShoppingCartPage(){
+        WebElement shoppingCart = driver.findElement(By.xpath("//a[@data-test='shopping-cart-link']"));
+        shoppingCart.click();
     }
 }

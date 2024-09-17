@@ -20,6 +20,36 @@ public class CartPage extends PageBase{
         super(driver, wait, actions);
     }
 
+    public boolean isItemInCart(String itemName) {
+        for (WebElement item : inventoryItems) {
+            WebElement title = item.findElement(By.xpath(".//div[@data-test='inventory-item-name']"));
+            if(title.getText().equals(itemName)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean isItemInCart(List<String> itemNames) {
+        for (String itemName : itemNames) {
+            if(!isItemInCart(itemName)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Item buildItem(WebElement item) {
+        return new Item(
+            getProperty(item, "inventory-item-name"),
+            getProperty(item, "inventory-item-desc"),
+            MoneyUtil.asCents(getProperty(item, "inventory-item-price")),
+            getProperty(item, "item-quantity")
+        );
+    }
+
+    private String getProperty(WebElement item, String property) {
+        String xpath = "//div[@data-test='%s']".formatted(property);
+        return item.findElement(By.xpath(xpath)).getText();
     private void deleteItem(String name) {
         String xpath = "//button[contains(@id, 'remove-']";
         inventoryItems.stream()
