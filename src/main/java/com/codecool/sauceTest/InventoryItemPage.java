@@ -14,6 +14,8 @@ public class InventoryItemPage extends PageBase {
     private WebElement removeButton;
     @FindBy(xpath = "//button[@data-test='back-to-products']")
     private WebElement backToProductsButton;
+    @FindBy(xpath = "//div[@data-test='inventory-item-name']")
+    private WebElement inventoryItemName;
 
     public InventoryItemPage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
@@ -26,6 +28,9 @@ public class InventoryItemPage extends PageBase {
         } catch (Exception e) {
             return false;
         }
+    }
+    public boolean isProductNameEqual(String productName) {
+        return inventoryItemName.getText().equals(productName);
     }
 
     public void addToCart() {
