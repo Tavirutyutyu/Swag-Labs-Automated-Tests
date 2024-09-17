@@ -14,21 +14,24 @@ public class InventoryItemPageTest extends TestBase{
     public void testAddItemToInventoryFromItemPage() {
         inventoryPage.showProductDetails("Sauce Labs Backpack");
         inventoryItemPage.addToCart();
-        assertTrue(inventoryItemPage.isProductInCart());
+        inventoryItemPage.goToShoppingCartPage();
+        assertTrue(cartPage.isItemInCart("Sauce Labs Backpack"));
     }
     @Test
     public void testRemoveItemFromInventoryFromItemPage() {
         inventoryPage.showProductDetails("Sauce Labs Backpack");
         inventoryItemPage.addToCart();
         inventoryItemPage.removeFromCart();
-        assertFalse(inventoryItemPage.isProductInCart());
+        inventoryItemPage.goToShoppingCartPage();
+        assertFalse(cartPage.isItemInCart("Sauce Labs Backpack"));
     }
     @Test
     public void testAddItemToCartFromInventoryPageAndRemoveFromItemPage() {
         inventoryPage.addProductToCart("Sauce Labs Backpack");
         inventoryPage.showProductDetails("Sauce Labs Backpack");
         inventoryItemPage.removeFromCart();
-        assertFalse(inventoryItemPage.isProductInCart());
+        inventoryItemPage.goToShoppingCartPage();
+        assertFalse(cartPage.isItemInCart("Sauce Labs Backpack"));
     }
     @Test
     public void testAddItemToCartFromItemPageAndRemoveFromInventoryPage() {
@@ -36,7 +39,8 @@ public class InventoryItemPageTest extends TestBase{
         inventoryItemPage.addToCart();
         inventoryItemPage.backToProductsPage();
         inventoryPage.removeProductFromCart("Sauce Labs Backpack");
-        assertFalse(inventoryItemPage.isProductInCart());
+        inventoryPage.goToShoppingCartPage();
+        assertFalse(cartPage.isItemInCart("Sauce Labs Backpack"));
     }
     @Test
     public void checkEveryItemsPage() {

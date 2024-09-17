@@ -44,4 +44,5 @@ public class InventoryItemPage extends PageBase {
     public void backToProductsPage() {
         backToProductsButton.click();
     }
+
 }
