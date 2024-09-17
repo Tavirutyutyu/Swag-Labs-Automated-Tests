@@ -47,16 +47,17 @@ public class InventoryPage extends PageBase {
     }
 
     private void clickOnRemoveFromCartButton(WebElement productElement) {
-        WebElement removeButton = productElement.findElement(By.xpath("//button[text()='Remove']"));
+        WebElement removeButton = productElement.findElement(By.xpath(".//button[text()='Remove']"));
         removeButton.click();
     }
 
     private void clickOnAddToCartButton(WebElement productElement) {
-        WebElement addToCartButton = productElement.findElement(By.xpath("//button[text()='Add to cart']"));
+        WebElement addToCartButton = productElement.findElement(By.xpath(".//button[text()='Add to cart']"));
         addToCartButton.click();
     }
 
     private WebElement getProduct(String productName) {
+
         return inventoryItems.stream()
                 .filter(e -> hasName(e, productName))
                 .findAny()
@@ -65,10 +66,20 @@ public class InventoryPage extends PageBase {
 
     private boolean hasName(WebElement element, String productName) {
         try {
-            WebElement title = element.findElement(By.xpath("//div[@data-test='inventory-item-name']"));
+            WebElement title = element.findElement(By.xpath(".//div[@data-test='inventory-item-name']"));
             return title.getText().equals(productName);
         } catch (NoSuchElementException e) {
             return false;
+        }
+    }
+
+    public void showProductDetails(String productName) {
+        WebElement productElement = getProduct(productName);
+        if (productElement != null) {
+            WebElement title = productElement.findElement(By.xpath(".//div[@data-test='inventory-item-name']"));
+            title.click();
+        } else {
+            System.out.println("No product found with name " + productName);
         }
     }
 }
