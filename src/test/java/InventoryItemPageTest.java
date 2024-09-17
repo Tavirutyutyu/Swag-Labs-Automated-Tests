@@ -8,7 +8,7 @@ public class InventoryItemPageTest extends TestBase{
     @BeforeEach
     public void setUp() {
         driver.get("https://www.saucedemo.com/");
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login("standard_user");
     }
     @Test
     public void testAddItemToInventoryFromItemPage() {
@@ -16,6 +16,7 @@ public class InventoryItemPageTest extends TestBase{
         inventoryItemPage.addToCart();
         inventoryItemPage.goToShoppingCartPage();
         assertTrue(cartPage.isItemInCart("Sauce Labs Backpack"));
+        cartPage.deleteItem("Sauce Labs Backpack");
     }
     @Test
     public void testRemoveItemFromInventoryFromItemPage() {
