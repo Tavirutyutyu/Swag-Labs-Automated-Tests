@@ -54,7 +54,7 @@ public class CheckoutTwoPage extends PageBase{
     }
 
     private String getProperty(WebElement item, String property) {
-        String xpath = "//div[@data-test='%s']".formatted(property);
+        String xpath = ".//div[@data-test='%s']".formatted(property);
         return item.findElement(By.xpath(xpath)).getText();
     }
 }
