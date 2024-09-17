@@ -1,3 +1,4 @@
+import com.codecool.sauceTest.InventoryItemPage;
 import com.codecool.sauceTest.InventoryPage;
 import com.codecool.sauceTest.LoginPage;
 import org.junit.jupiter.api.AfterAll;
@@ -21,6 +22,7 @@ public class TestBase {
 
     protected LoginPage loginPage;
     protected InventoryPage inventoryPage;
+    protected InventoryItemPage inventoryItemPage;
 
     @BeforeAll
     public void beforeAll() {
@@ -34,6 +36,7 @@ public class TestBase {
 
         loginPage = new LoginPage(driver, wait, actions);
         inventoryPage = new InventoryPage(driver, wait, actions);
+        inventoryItemPage = new InventoryItemPage(driver, wait, actions);
     }
     @AfterAll
     public void afterAll() {

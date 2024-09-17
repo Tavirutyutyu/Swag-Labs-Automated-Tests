@@ -25,7 +25,7 @@ public class InventoryPage extends PageBase {
     public boolean isProductInCart(String productName) {
         WebElement productElement = getProduct(productName);
         try {
-            productElement.findElement(By.xpath(".//button[text()='Remove']"));
+            productElement.findElement(By.xpath("//button[text()='Remove']"));
             return true;
         } catch (Exception e) {
             return false;
@@ -69,6 +69,14 @@ public class InventoryPage extends PageBase {
             return title.getText().equals(productName);
         } catch (NoSuchElementException e) {
             return false;
+        }
+    }
+
+    public void showProductDetails(String productName) {
+        WebElement productElement = getProduct(productName);
+        if (productElement != null) {
+            WebElement title = productElement.findElement(By.xpath("//div[@data-test='inventory-item-name']"));
+            title.click();
         }
     }
 }
