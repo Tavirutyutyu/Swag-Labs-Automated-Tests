@@ -15,6 +15,7 @@ public class CartPage extends PageBase{
     @FindBy(xpath="//div[@data-test='inventory-item']")
     private List<WebElement> inventoryItems;
 
+
     public CartPage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
     }
@@ -49,5 +50,12 @@ public class CartPage extends PageBase{
     private String getProperty(WebElement item, String property) {
         String xpath = "//div[@data-test='%s']".formatted(property);
         return item.findElement(By.xpath(xpath)).getText();
+    private void deleteItem(String name) {
+        String xpath = "//button[contains(@id, 'remove-']";
+        inventoryItems.stream()
+            .filter(item -> item.getText().contains(name))
+            .findAny().orElseThrow(() -> new RuntimeException("item name not found"))
+            .findElement(By.xpath(xpath))
+            .click();
     }
 }
