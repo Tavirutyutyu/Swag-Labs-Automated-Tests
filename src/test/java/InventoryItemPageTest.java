@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,10 +10,11 @@ public class InventoryItemPageTest extends TestBase{
     @BeforeEach
     public void setUp() {
         driver.get("https://www.saucedemo.com/");
-        loginPage.login("standard_user");
     }
     @Test
     public void testAddItemToInventoryFromItemPage() {
+        loginPage.login("standard_user");
+
         inventoryPage.showProductDetails("Sauce Labs Backpack");
         inventoryItemPage.addToCart();
         inventoryItemPage.goToShoppingCartPage();
@@ -20,6 +23,8 @@ public class InventoryItemPageTest extends TestBase{
     }
     @Test
     public void testRemoveItemFromInventoryFromItemPage() {
+        loginPage.login("standard_user");
+
         inventoryPage.showProductDetails("Sauce Labs Backpack");
         inventoryItemPage.addToCart();
         inventoryItemPage.removeFromCart();
@@ -28,6 +33,8 @@ public class InventoryItemPageTest extends TestBase{
     }
     @Test
     public void testAddItemToCartFromInventoryPageAndRemoveFromItemPage() {
+        loginPage.login("standard_user");
+
         inventoryPage.addProductToCart("Sauce Labs Backpack");
         inventoryPage.showProductDetails("Sauce Labs Backpack");
         inventoryItemPage.removeFromCart();
@@ -36,6 +43,8 @@ public class InventoryItemPageTest extends TestBase{
     }
     @Test
     public void testAddItemToCartFromItemPageAndRemoveFromInventoryPage() {
+        loginPage.login("standard_user");
+
         inventoryPage.showProductDetails("Sauce Labs Backpack");
         inventoryItemPage.addToCart();
         inventoryItemPage.backToProductsPage();
@@ -43,8 +52,18 @@ public class InventoryItemPageTest extends TestBase{
         inventoryPage.goToShoppingCartPage();
         assertFalse(cartPage.isItemInCart("Sauce Labs Backpack"));
     }
+    @ParameterizedTest
+    @ValueSource(strings = {"standard_user", "performance_glitch_user", "error_user"})
+    public void checkEveryItemsPage(String username) {
+        loginPage.login(username);
+        checkEveryItem();
+    }
     @Test
-    public void checkEveryItemsPage() {
+    public void checkEveryItemsPageWithProblemUser(){
+        loginPage.login("problem_user");
+        checkEveryItem();
+    }
+    public void checkEveryItem(){
         inventoryPage.showProductDetails("Sauce Labs Backpack");
         assertTrue(inventoryItemPage.isProductNameEqual("Sauce Labs Backpack"));
         inventoryItemPage.backToProductsPage();
