@@ -1,6 +1,6 @@
 name: Hello world
 on:
-  push:
+  pull:
     branches:
       -development
 
