@@ -24,7 +24,6 @@ public class LoginPage extends PageBase{
 
     public void login(String username) {
         this.username.sendKeys(username);
-
         this.password.sendKeys(PASSWORD);
         this.loginButton.click();
     }
