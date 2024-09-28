@@ -24,7 +24,7 @@ public class InventoryItemPageTest extends TestBase {
     }
     @ParameterizedTest
     @ValueSource(strings = { "problem_user"})
-    @DisplayName("Adding an item to cart from the Inventory Item page not working properly.")
+    @DisplayName("Adding an item to cart from the With problem_user")
     public void testAddItemToCartFromItemPageSadCases(String username) {
         loginPage.login(username);
         addItemToCartFromItemPage();
@@ -55,7 +55,7 @@ public class InventoryItemPageTest extends TestBase {
 
     @ParameterizedTest
     @ValueSource(strings = {"problem_user", "error_user"})
-    @DisplayName("Adding an item to cart from Inventory page and remove it from the Inventory Item page not working properly.")
+    @DisplayName("Adding an item to cart from Inventory page and remove it from the With problem_user")
     public void testAddItemToCartFromInventoryPageAndRemoveFromItemPageSadCases(String username) {
         loginPage.login(username);
         addToCartFromInventoryPageRemoveFromItemPage();
