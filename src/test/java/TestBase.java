@@ -1,7 +1,4 @@
-import com.codecool.sauceTest.CartPage;
-import com.codecool.sauceTest.InventoryItemPage;
-import com.codecool.sauceTest.InventoryPage;
-import com.codecool.sauceTest.LoginPage;
+import com.codecool.sauceTest.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
@@ -25,6 +22,9 @@ public class TestBase {
     protected InventoryPage inventoryPage;
     protected InventoryItemPage inventoryItemPage;
     protected CartPage cartPage;
+    protected CheckoutOnePage checkoutOnePage;
+    protected CheckoutTwoPage checkoutTwoPage;
+    protected CheckoutCompletePage checkoutCompletePage;
 
     @BeforeAll
     public void beforeAll() {
@@ -40,6 +40,9 @@ public class TestBase {
         inventoryPage = new InventoryPage(driver, wait, actions);
         inventoryItemPage = new InventoryItemPage(driver, wait, actions);
         cartPage = new CartPage(driver, wait, actions);
+        checkoutOnePage = new CheckoutOnePage(driver, wait, actions);
+        checkoutTwoPage = new CheckoutTwoPage(driver, wait, actions);
+        checkoutCompletePage = new CheckoutCompletePage(driver, wait, actions);
     }
     @AfterAll
     public void afterAll() {

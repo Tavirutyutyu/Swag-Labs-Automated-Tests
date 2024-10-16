@@ -33,6 +33,10 @@ public class CheckoutTwoPage extends PageBase{
         items = findItems();
     }
 
+    public void finish(){
+        finishButton.click();
+    }
+
     public List<Item> getItems() {
         return List.of(items.toArray(new Item[0]));
     }

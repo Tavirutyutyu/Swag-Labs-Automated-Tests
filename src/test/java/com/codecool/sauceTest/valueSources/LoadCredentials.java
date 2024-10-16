@@ -47,4 +47,14 @@ public class LoadCredentials {
                 Arguments.of("visual_user", "a", "https://www.saucedemo.com/", notMatched )
         );
     }
+
+    public static Stream<Arguments> loadValidBuyerCredentials() {
+        return  Stream.of(
+                Arguments.of("standard_user", "Drót", "Feszület", "1234", "Thank you for your order!"),
+                Arguments.of("problem_user", "Drót", "Feszület", "1234", "Thank you for your order!"),
+                Arguments.of("performance_glitch_user", "Drót", "Feszület", "1234", "Thank you for your order!"),
+                Arguments.of("error_user", "Drót", "Feszület", "1234", "Thank you for your order!"),
+                Arguments.of("visual_user", "Drót", "Feszület", "1234", "Thank you for your order!")
+        );
+    }
 }
