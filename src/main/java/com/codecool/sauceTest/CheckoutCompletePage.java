@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CheckoutCompletePage extends PageBase{
     @FindBy(id ="back-to-products")
     private WebElement backHomeButton;
+    @FindBy(xpath = "//*[@data-test='complete-header']")
+    private WebElement completeText;
 
     public CheckoutCompletePage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
@@ -16,5 +18,9 @@ public class CheckoutCompletePage extends PageBase{
 
     public void clickOnBackHomeButton() {
         backHomeButton.click();
+    }
+
+    public boolean completeTextEquals(String text) {
+        return completeText.getText().equals(text);
     }
 }

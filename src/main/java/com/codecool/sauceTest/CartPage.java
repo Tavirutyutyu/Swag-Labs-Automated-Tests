@@ -14,6 +14,8 @@ import java.util.List;
 public class CartPage extends PageBase{
     @FindBy(xpath="//div[@data-test='inventory-item']")
     private List<WebElement> inventoryItems;
+    @FindBy(xpath = "//button[@data-test='checkout']")
+    private WebElement checkoutButton;
 
 
     public CartPage(WebDriver driver, WebDriverWait wait, Actions actions) {
@@ -36,6 +38,10 @@ public class CartPage extends PageBase{
             }
         }
         return true;
+    }
+
+    public void checkout() {
+        checkoutButton.click();
     }
 
     private Item buildItem(WebElement item) {
