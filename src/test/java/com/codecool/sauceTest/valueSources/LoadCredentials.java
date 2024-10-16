@@ -57,4 +57,10 @@ public class LoadCredentials {
                 Arguments.of("visual_user", "Drót", "Feszület", "1234", "Thank you for your order!")
         );
     }
+
+    public static Stream<Arguments> loadInvalidBuyerCredentials() {
+        return Stream.of(
+                Arguments.of("", "LastName", "1234", "Error: First Name is required")
+        );
+    }
 }

@@ -17,10 +17,16 @@ public class LoginPage extends PageBase{
     private WebElement errorMessage;
 
     private static final String PASSWORD = "secret_sauce";
+    private static final String STANDARD_USERNAME = "standard_user";
     public LoginPage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
     }
 
+    public void standardLogin() {
+        username.sendKeys(STANDARD_USERNAME);
+        password.sendKeys(PASSWORD);
+        loginButton.click();
+    }
 
     public void login(String username) {
         this.username.sendKeys(username);

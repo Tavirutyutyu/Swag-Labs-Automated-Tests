@@ -13,7 +13,7 @@ public class CheckoutOnePage extends PageBase{
     private WebElement lastNameInput;
     @FindBy(id = "postal-code")
     private WebElement postalCodeInput;
-    @FindBy(className = "error-message-container")
+    @FindBy(xpath = "//h3[@data-test='error']")
     private WebElement errorMessage;
     @FindBy(id = "cancel")
     private WebElement cancelButton;
@@ -29,6 +29,10 @@ public class CheckoutOnePage extends PageBase{
         lastNameInput.sendKeys(lastName);
         postalCodeInput.sendKeys(postalCode);
         continueButton.click();
+    }
+
+    public boolean errorMessageEquals(String errorMessage) {
+        return this.errorMessage.getText().equals(errorMessage);
     }
 
     public void cancel() {

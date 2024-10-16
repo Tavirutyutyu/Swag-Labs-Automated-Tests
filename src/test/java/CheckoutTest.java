@@ -17,17 +17,30 @@ public class CheckoutTest extends TestBase {
     @ParameterizedTest
     @MethodSource("provideValidBuyerCredentials")
     @DisplayName("Test buying a product")
-    public void testCheckout(String username, String firstName, String lastName, String zipCode, String checkoutText) throws InterruptedException {
+    public void testCheckoutWithValidCredentials(String username, String firstName, String lastName, String zipCode, String checkoutText) {
         loginPage.login(username);
         inventoryPage.goToShoppingCartPage();
         cartPage.checkout();
         checkoutOnePage.fillData(firstName, lastName, zipCode);
         checkoutTwoPage.finish();
-        Thread.sleep(1000);
         assertTrue(checkoutCompletePage.completeTextEquals(checkoutText));
+    }
+    @ParameterizedTest
+    @MethodSource("provideInvalidBuyerCredentials")
+    public void testCheckoutWithInvalidCredentials(String firstName, String lastName, String zipCode, String expectedMessage) {
+        loginPage.standardLogin();
+        inventoryPage.goToShoppingCartPage();
+        cartPage.checkout();
+        checkoutOnePage.fillData(firstName, lastName, zipCode);
+        assertTrue(checkoutOnePage.errorMessageEquals(expectedMessage));
     }
 
     public Stream<Arguments> provideValidBuyerCredentials() {
         return LoadCredentials.loadValidBuyerCredentials();
     }
+
+    public Stream<Arguments> provideInvalidBuyerCredentials() {
+        return LoadCredentials.loadInvalidBuyerCredentials();
+    }
+
 }
