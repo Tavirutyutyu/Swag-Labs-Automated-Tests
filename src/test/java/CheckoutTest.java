@@ -27,8 +27,9 @@ public class CheckoutTest extends TestBase {
     }
     @ParameterizedTest
     @MethodSource("provideInvalidBuyerCredentials")
-    public void testCheckoutWithInvalidCredentials(String firstName, String lastName, String zipCode, String expectedMessage) {
-        loginPage.standardLogin();
+    @DisplayName("Test trying to buy a product with invalid credentials")
+    public void testCheckoutWithInvalidCredentials(String username, String firstName, String lastName, String zipCode, String expectedMessage) {
+        loginPage.login(username);
         inventoryPage.goToShoppingCartPage();
         cartPage.checkout();
         checkoutOnePage.fillData(firstName, lastName, zipCode);
