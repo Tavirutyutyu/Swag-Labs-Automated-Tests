@@ -15,6 +15,7 @@ writing automated tests. The tests cover various features of the webshop, such a
 - Checkout process
 
 These tests simulate real-world user interactions to verify that the webshop behaves as expected.
+
 SUT url: https://www.saucedemo.com/
 
 ## Tools Used
